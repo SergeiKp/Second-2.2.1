@@ -4,6 +4,7 @@ import hiber.config.AppConfig;
 import hiber.model.Car;
 import hiber.model.User;
 import hiber.service.UserService;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
@@ -20,7 +21,8 @@ public class MainApp {
         List<Car> cars = Arrays.asList(
                 new Car("BMW", 3),
                 new Car("Audi", 6),
-                new Car("Mercedes-Benz", 300)
+                new Car("Mercedes-Benz", 300),
+                new Car("Lada", 12)
         );
         List<User> users = Arrays.asList(
                 new User("Sam", "Golden", "Golden@gmail.com"),
@@ -47,6 +49,7 @@ public class MainApp {
             System.out.println("Car Model = " + car.getModel() + ", Series = " + car.getSeries());
         }
         System.out.println(userService.getUserByCar("Audi",6));
+
 
         context.close();
     }
