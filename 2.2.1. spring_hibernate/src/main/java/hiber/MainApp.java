@@ -3,6 +3,7 @@ package hiber;
 import hiber.config.AppConfig;
 import hiber.model.Car;
 import hiber.model.User;
+import hiber.service.CarService;
 import hiber.service.UserService;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -17,6 +18,7 @@ public class MainApp {
                 new AnnotationConfigApplicationContext(AppConfig.class);
 
         UserService userService = context.getBean(UserService.class);
+        CarService carService = context.getBean(CarService.class);
 
         List<Car> cars = Arrays.asList(
                 new Car("BMW", 3),
@@ -27,13 +29,14 @@ public class MainApp {
         List<User> users = Arrays.asList(
                 new User("Sam", "Golden", "Golden@gmail.com"),
                 new User("Jon", "Silver", "Silver@gmail.com"),
-                new User("Bob", "Diamond", "Diamond@gmail.com")
+                new User("Bob", "Diamond", "Diamond@gmail.com"),
+                new User("Ivan", "Solomonov", "Ivasol@gmail.com")
         );
 
-        userService.addUsersAndCars(users,cars);
+        userService.addUsersAndCars(users, cars);
 
         List<User> saveUsers = userService.listUsers();
-        List<Car> saveCars = userService.listCars();
+        List<Car> saveCars = carService.listCars();
 
         for (User user : saveUsers) {
             System.out.println("Id = " + user.getId());
@@ -48,7 +51,7 @@ public class MainApp {
         for (Car car : saveCars) {
             System.out.println("Car Model = " + car.getModel() + ", Series = " + car.getSeries());
         }
-        System.out.println(userService.getUserByCar("Audi",6));
+        System.out.println(userService.getUserByCar("Audi", 6));
 
 
         context.close();
